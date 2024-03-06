@@ -1,4 +1,5 @@
 """Module containing 'constants' for KEV JSON file and schema"""
+
 #! /usr/bin/python3
 
 
