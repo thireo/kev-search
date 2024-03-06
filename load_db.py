@@ -6,7 +6,7 @@ import json
 from kev_schema import *
 
 
-def get_data():
+def fetch_data():
     with urllib.request.urlopen(URL_JSON_DB) as url:
         data = json.load(url)
         return data
@@ -19,7 +19,7 @@ def search_cpe(vulnerabilities, cve):
 
 
 if __name__ == "__main__":
-    data = get_data()
+    data = fetch_data()
     # 	print(data.values())
     print(data[DOC_TITLE])
     print(data[DOC_VER])
