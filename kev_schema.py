@@ -3,8 +3,8 @@
 
 
 URL_JSON_DB = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
-URL_JSON_SCHEMA = \
-    "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json"
+# pylint: disable=C0301
+URL_JSON_SCHEMA = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json"
 
 
 DOC_TITLE = "title"
