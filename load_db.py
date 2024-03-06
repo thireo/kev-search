@@ -1,26 +1,28 @@
-#! /usr/bin/python3
+"""Module for fetching and loading KEV data"""
 
-import urllib.request
-import json
+import requests
 
-from kev_schema import *
+import kev_schema as kev
 
 
 def fetch_data():
-    with urllib.request.urlopen(URL_JSON_DB) as url:
-        data = json.load(url)
+    """Fetch data from CISA.gov KEV"""
+    with requests.get(kev.URL_JSON_DB, timeout=15) as r:
+        data = r.json()
         return data
 
 
 def search_cpe(vulnerabilities, cve):
+    """Search for CVE [cve] in KEV dataset [vulnerabilities]"""
     for vuln in vulnerabilities:
-        if cve == vuln[VULN_CVE]:
+        if cve == vuln[kev.VULN_CVE]:
             yield vuln
 
 
+# pylint: disable=W0105
+"""
 if __name__ == "__main__":
     data = fetch_data()
-    # 	print(data.values())
     print(data[DOC_TITLE])
     print(data[DOC_VER])
     print(data[DOC_TIMESTAMP])
@@ -30,4 +32,5 @@ if __name__ == "__main__":
     for x in search_cpe(data[DOC_VULNERABILITIES], "CVE-2024-1709"):
         print(x)
     print(len(data[DOC_VULNERABILITIES]))
-    # print(object.values())
+
+"""

@@ -1,8 +1,10 @@
+"""Module containing 'constants' for KEV JSON file and schema"""
 #! /usr/bin/python3
 
 
 URL_JSON_DB = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
-URL_JSON_SCHEMA = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json"
+URL_JSON_SCHEMA = \
+    "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities_schema.json"
 
 
 DOC_TITLE = "title"
