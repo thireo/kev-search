@@ -2,8 +2,8 @@
 
 import requests
 
+from jsonschema import validate
 import kev_schema as kev
-
 
 def test_schema_is_online():
     """Test KEV schema is downloadable"""
@@ -12,8 +12,8 @@ def test_schema_is_online():
     assert r.json() is not None
 
 
-def test_schema_against_downloaded():
-    """Test schema against download schema"""
+def test_variables_against_downloaded():
+    """Test variables against download schema"""
     r = requests.get(kev.URL_JSON_SCHEMA, timeout=15)
     assert r.status_code == 200
     assert r.json() is not None
@@ -37,3 +37,15 @@ def test_schema_against_downloaded():
     assert kev.VULN_NOTES in schema_vuln
     assert kev.VULN_PRODUCT in schema_vuln
     assert kev.VULN_VENDOR in schema_vuln
+
+def test_downloaded_against_schema():
+    """Test downloaded schema against download data"""
+    r = requests.get(kev.URL_JSON_SCHEMA, timeout=15)
+    assert r.status_code == 200
+    assert r.json() is not None
+    schema = r.json()
+    r = requests.get(kev.URL_JSON_DB, timeout=15)
+    assert r.status_code == 200
+    assert r.json() is not None
+    data = r.json()
+    assert validate(instance=data,schema=schema) is None
